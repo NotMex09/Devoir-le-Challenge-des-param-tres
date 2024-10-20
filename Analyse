@@ -1,0 +1,12 @@
+L'erreur que nous avons rencontrée est probablement due à un dépassement de mémoire,plus précisément un dépassement de la pile (stack overflow).
+En C++, les paramètres des fonctions sont généralement stockés dans la pile d'exécution. Cette pile a une taille limitée qui varie en fonction du système d'exploitation,
+de l'implémentation du compilateur et de la configuration de la RAM. Par conséquent, lorsqu'une fonction est appelée avec un nombre très élevé de paramètres,
+comme dans notre cas où vous avez atteint un milliard de paramètres, la pile finit par se remplir complètement, ce qui entraîne une erreur fatale.
+Théoriquement, la spécification de GCC (et des compilateurs similaires) recommande de ne pas dépasser 256 paramètres par fonction.
+Cette limite a pour but de préserver la mémoire et de garantir de bonnes performances.
+En pratique, la limite réelle peut varier selon plusieurs facteurs :
+Taille de la mémoire RAM : Plus vous avez de RAM disponible, plus vous pouvez utiliser de paramètres avant de rencontrer des erreurs.
+Taille de la pile (stack size) : Chaque thread ou programme a une pile avec une taille fixe, qui peut souvent être modifiée par l'utilisateur ou par le système.
+Configuration du compilateur : Certains compilateurs, comme GCC, peuvent tolérer un plus grand nombre de paramètres en fonction des options de compilation ou de l'architecture utilisée.
+Version du compilateur : Des versions récentes de GCC peuvent offrir une meilleure gestion des ressources, mais il est toujours conseillé de rester en dessous de la limite de 256 paramètres
+pour éviter des comportements imprévisibles.
